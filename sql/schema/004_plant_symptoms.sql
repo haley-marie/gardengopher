@@ -1,7 +1,7 @@
 -- +goose Up
 CREATE TABLE plant_symptoms (
-	plant_id UUID REFERENCES plants,
-	symptom_id UUID REFERENCES symptoms,
+	plant_id BIGINT REFERENCES plants,
+	symptom_id BIGINT REFERENCES symptoms,
 	severity_weight INTEGER
 );
 

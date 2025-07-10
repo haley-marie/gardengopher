@@ -2,12 +2,14 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/pressly/goose/v3/database"
+	"github.com/jubilant-gremlin/gardengopher/internal/database"
+	_ "github.com/lib/pq"
 )
 
 type apiConfig struct {
@@ -43,10 +45,21 @@ func main() {
 	}
 	dbQueries := database.New(db)
 
+	cfg := &apiConfig{
+		FilepathRoot: filepathRoot,
+		Port:         port,
+		DBQueries:    dbQueries,
+	}
+
 	mux := http.NewServeMux()
 	srv := &http.Server{
 		Addr:    ":" + port,
 		Handler: mux,
 	}
 
+	mux.HandleFunc("/api/plants", cfg.handlerGetPlants)
+	mux.HandleFunc("/api/symptoms", cfg.handlerGetSymptoms)
+
+	fmt.Printf("Serving files from %s on port %s\n", cfg.FilepathRoot, cfg.Port)
+	err = srv.ListenAndServe()
 }
