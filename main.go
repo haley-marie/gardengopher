@@ -57,8 +57,9 @@ func main() {
 		Handler: mux,
 	}
 
-	mux.HandleFunc("/api/plants", cfg.handlerGetPlants)
-	mux.HandleFunc("/api/symptoms", cfg.handlerGetSymptoms)
+	mux.HandleFunc("GET /api/plants", cfg.handlerGetPlants)
+	mux.HandleFunc("GET /api/symptoms", cfg.handlerGetSymptoms)
+	mux.HandleFunc("POST /api/diagnose", cfg.handlerDiagnose)
 
 	fmt.Printf("Serving files from %s on port %s\n", cfg.FilepathRoot, cfg.Port)
 	err = srv.ListenAndServe()
