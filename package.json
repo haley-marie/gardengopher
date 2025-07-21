@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "@tailwindcss/cli": "^4.1.11",
     "@types/node": "^24.0.13",
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3"
   },
   "devDependencies": {

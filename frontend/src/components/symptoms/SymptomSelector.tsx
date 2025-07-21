@@ -1,25 +1,6 @@
 import React from "react";
 import { Leaf, Eye, AlertCircle, CheckCircle } from 'lucide-react';
-
-interface Symptom {
-	id: string;
-	description: string;
-	category: string;
-}
-
-interface Plant {
-	id: number;
-	name: string;
-	display_name: string;
-}
-
-interface SymptomSelectorProps {
-	symptoms: Symptom[];
-	selectedSymptoms: Set<string>;
-	onSymptomToggle: (symptomId: string) => void;
-	selectedPlant?: Plant | null;
-	loading?: boolean;
-}
+import { SymptomSelectorProps } from "../../../types";
 
 const SymptomSelector: React.FC<SymptomSelectorProps> = ({
 	symptoms,
@@ -69,7 +50,7 @@ const SymptomSelector: React.FC<SymptomSelectorProps> = ({
 				<h2 className="text-xl font-semibold mb-2">What symptoms do you observe?</h2>
 				{selectedPlant && (
 					<p className="text-gray-600">
-						Select all symptoms you notice on your {selectedPlant.display_name}
+						Select all symptoms you notice on your {selectedPlant.name}
 					</p>
 				)}
 			</div>
@@ -90,15 +71,15 @@ const SymptomSelector: React.FC<SymptomSelectorProps> = ({
 							{categorySymptoms.map(symptom => (
 								<label
 									key={symptom.id}
-									className={`flex items-start p-3 rounded-md border cursor-pointer transition-colors ${selectedSymptoms.has(symptom.id)
+									className={`flex items-start p-3 rounded-md border cursor-pointer transition-colors ${selectedSymptoms.has(symptom.category)
 										? 'bg-blue-50 border-blue-200'
 										: 'border-gray-200 hover:bg-gray-50'
 										}`}
 								>
 									<input
 										type="checkbox"
-										checked={selectedSymptoms.has(symptom.id)}
-										onChange={() => onSymptomToggle(symptom.id)}
+										checked={selectedSymptoms.has(symptom.category)}
+										onChange={() => onSymptomToggle(symptom.category)}
 										className="mt-1 mr-3 text-blue-500"
 									/>
 									<span className="text-sm">{symptom.description}</span>
@@ -117,7 +98,7 @@ const SymptomSelector: React.FC<SymptomSelectorProps> = ({
 						</h4>
 						<div className="text-sm text-green-700">
 							{Array.from(selectedSymptoms).map(symptomId => {
-								const symptom = symptoms.find(s => s.id === symptomId);
+								const symptom = symptoms.find(s => s.category === symptomId);
 								return symptom ? symptom.description : symptomId;
 							}).join(', ')}
 						</div>

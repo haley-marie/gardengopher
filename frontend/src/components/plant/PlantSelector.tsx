@@ -1,18 +1,6 @@
 import React from 'react';
 import { Leaf } from 'lucide-react';
-
-interface Plant {
-	id: number;
-	name: string;
-	display_name: string;
-}
-
-interface PlantSelectorProps {
-	plants: Plant[];
-	selectedPlant: Plant | null;
-	onPlantSelect: (plant: Plant) => void;
-	loading?: boolean;
-}
+import { PlantSelectorProps } from '../../../types';
 
 const PlantSelector: React.FC<PlantSelectorProps> = ({
 	plants,
@@ -47,7 +35,7 @@ const PlantSelector: React.FC<PlantSelectorProps> = ({
 						<div className='flex items-center justify-center mb-2'>
 							<Leaf className='w-8 h-8 text-green-500' />
 						</div>
-						<div className='font-medium'>{plant.display_name}</div>
+						<div className='font-medium'>{plant.name}</div>
 					</button>
 				))
 				}

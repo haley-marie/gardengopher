@@ -6,12 +6,28 @@ export interface Plant {
 	updated_at?: string;
 }
 
+export interface PlantSelectorProps {
+	plants: Plant[];
+	selectedPlant: Plant | null;
+	onPlantSelect: (plant: Plant) => void;
+	loading?: boolean;
+}
+
 export interface Symptom {
 	id: number;
 	name: string;
 	description: string;
+	category: string;
 	created_at?: string;
 	updated_at?: string;
+}
+
+export interface SymptomSelectorProps {
+	symptoms: Symptom[];
+	selectedSymptoms: Set<string>;
+	onSymptomToggle: (symptomId: string) => void;
+	selectedPlant?: Plant | null;
+	loading?: boolean;
 }
 
 export interface Deficiency {
@@ -55,10 +71,29 @@ export interface DiagnosisResult {
 	rule_matched?: DiagnosticRule;
 }
 
+export interface DiagnosisResultProps {
+	diagnosis: DiagnosisData;
+	loading?: boolean;
+	error?: string | null;
+}
+
+export interface DiagnosisData {
+	deficiency: string;
+	name: string;
+	description: string;
+	treatment: string;
+	confidence: number;
+	matchedSymptoms?: string[];
+}
+
 export interface DiagnosisResponse {
 	success: boolean;
 	results: DiagnosisResult[];
 	message?: string;
+}
+
+export interface TreatmentRecommendationProps {
+	diagnosis: DiagnosisData
 }
 
 export interface ApiResponse<T> {

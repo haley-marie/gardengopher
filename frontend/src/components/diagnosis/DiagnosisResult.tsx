@@ -1,20 +1,6 @@
 import React from "react";
 import { AlertTriangle, CheckCircle, Info } from "lucide-react";
-
-interface DiagnosisData {
-	deficiency: string;
-	name: string;
-	description: string;
-	treatment: string;
-	confidence: number;
-	matchedSymptoms?: string[];
-}
-
-interface DiagnosisResultProps {
-	diagnosis: DiagnosisData;
-	loading?: boolean;
-	error?: string | null;
-}
+import { DiagnosisResultProps } from "../../../types";
 
 const DiagnosisResult: React.FC<DiagnosisResultProps> = ({
 	diagnosis,

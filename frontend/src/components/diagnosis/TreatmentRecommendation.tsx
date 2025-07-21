@@ -1,17 +1,7 @@
 import React from "react";
 import { Lightbulb, CheckSquare, AlertCircle } from "lucide-react";
+import { TreatmentRecommendationProps } from "../../../types";
 
-interface DiagnosisData {
-	deficiency: string;
-	name: string;
-	description: string;
-	treatment: string;
-	confidence: number;
-}
-
-interface TreatmentRecommendationProps {
-	diagnosis: DiagnosisData
-}
 
 const TreatmentRecommendation: React.FC<TreatmentRecommendationProps> = ({
 	diagnosis
@@ -20,7 +10,7 @@ const TreatmentRecommendation: React.FC<TreatmentRecommendationProps> = ({
 	const treatmentSteps = diagnosis.treatment
 		.split(/[,;]/)
 		.map(step => step.trim())
-		.filter(step => step.length > 0;
+		.filter(step => step.length > 0);
 
 	const hasMultipleSteps = treatmentSteps.length > 1;
 
