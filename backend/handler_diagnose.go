@@ -39,7 +39,7 @@ type DiagnosticResponse struct {
 	Message string             `json:"message"`
 }
 
-func (cfg *apiConfig) HandlerDiagnose(w http.ResponseWriter, r *http.Request) {
+func (cfg *apiConfig) handlerDiagnose(w http.ResponseWriter, r *http.Request) {
 	var req DiagnosticRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request body.", err)
