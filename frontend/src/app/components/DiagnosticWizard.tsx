@@ -85,7 +85,7 @@ const PlantSelectionStep: React.FC<PlantSelectionStepProps> = ({
             `}
 					>
 						<div className="font-semibold text-gray-800 capitalize">
-							{plant.name.replace('_', ' ')}
+							{plant?.name?.replace('_', ' ') ?? ''}
 						</div>
 						{plant.scientific_name && (
 							<div className="text-sm text-gray-500 italic mt-1">
@@ -135,7 +135,7 @@ const SymptomSelectionStep: React.FC<SymptomSelectionStepProps> = ({
 				<p className="text-gray-600">
 					What symptoms are you observing on your{' '}
 					<span className="font-semibold capitalize">
-						{selectedPlant.name.replace('_', ' ')}
+						{selectedPlant?.name?.replace('_', ' ') ?? ''}
 					</span>?
 				</p>
 				<div className="mt-2 text-sm text-green-600">
@@ -201,6 +201,7 @@ const DiagnosisResultsStep: React.FC<DiagnosisResultsStepProps> = ({
 			</div>
 		);
 	}
+	console.log("First result object:", results[0]);
 
 	if (!results || results.length === 0) {
 		return (
@@ -223,7 +224,7 @@ const DiagnosisResultsStep: React.FC<DiagnosisResultsStepProps> = ({
 				<p className="text-gray-600">
 					Based on your{' '}
 					<span className="font-semibold capitalize">
-						{selectedPlant.name.replace('_', ' ')}
+						{selectedPlant?.name?.replace('_', ' ') ?? ''}
 					</span>{' '}
 					and the {selectedSymptoms.length} selected symptom{selectedSymptoms.length !== 1 ? 's' : ''}
 				</p>
@@ -232,26 +233,25 @@ const DiagnosisResultsStep: React.FC<DiagnosisResultsStepProps> = ({
 			<div className="space-y-4">
 				{results.map((result, index) => (
 					<div
-						key={`${result.deficiency.id}-${index}`}
+						key={`${result.deficiency_id ?? ''}-${index}`}
 						className="border border-gray-200 rounded-lg p-6 bg-white shadow-sm"
 					>
 						{/* Confidence indicator */}
 						<div className="flex items-center justify-between mb-4">
 							<h3 className="text-xl font-semibold text-gray-800 capitalize">
-								{result.deficiency.name.replace('_', ' ')}
+								{result.deficiency_name.replace('_', ' ') ?? ''}
 							</h3>
 							<div className="flex items-center">
 								<div className="text-sm text-gray-600 mr-2">Confidence:</div>
 								<div className={`
-                  px-3 py-1 rounded-full text-sm font-medium
-                  ${result.confidence_score >= 0.8
+                  								px-3 py-1 rounded-full text-sm font-medium
+											${result.confidence >= 0.8
 										? 'bg-green-100 text-green-800'
-										: result.confidence_score >= 0.6
+										: result.confidence >= 0.6
 											? 'bg-yellow-100 text-yellow-800'
 											: 'bg-red-100 text-red-800'
-									}
-                `}>
-									{Math.round(result.confidence_score * 100)}%
+									}`}>
+									{Math.round(result.confidence * 100)}%
 								</div>
 							</div>
 						</div>
@@ -259,7 +259,7 @@ const DiagnosisResultsStep: React.FC<DiagnosisResultsStepProps> = ({
 						{/* Description */}
 						<div className="mb-4">
 							<h4 className="font-medium text-gray-700 mb-2">Description:</h4>
-							<p className="text-gray-600">{result.deficiency.description}</p>
+							<p className="text-gray-600">{result.description ?? ''}</p>
 						</div>
 
 						{/* Matched symptoms */}
@@ -282,7 +282,7 @@ const DiagnosisResultsStep: React.FC<DiagnosisResultsStepProps> = ({
 						{/* Treatment */}
 						<div className="bg-green-50 border border-green-200 rounded-md p-4">
 							<h4 className="font-medium text-green-800 mb-2">Recommended Treatment:</h4>
-							<p className="text-green-700">{result.deficiency.treatment}</p>
+							<p className="text-green-700">{result.treatment ?? ''}</p>
 						</div>
 					</div>
 				))}
@@ -440,12 +440,11 @@ const DiagnosticWizard: React.FC = () => {
 					onClick={isLastStep ? handleRestart : handleBack}
 					disabled={isFirstStep && !isLastStep}
 					className={`
-            px-6 py-2 rounded-md font-medium transition-colors duration-200
-            ${isFirstStep && !isLastStep
+            						px-6 py-2 rounded-md font-medium transition-colors duration-200
+            						${isFirstStep && !isLastStep
 							? 'text-gray-400 cursor-not-allowed'
 							: 'text-gray-700 border border-gray-300 hover:bg-gray-50'
-						}
-          `}
+						}`}
 				>
 					{isLastStep ? 'Start Over' : 'Back'}
 				</button>
@@ -453,16 +452,15 @@ const DiagnosticWizard: React.FC = () => {
 				{!isLastStep && (
 					<button
 						onClick={handleNext}
-						disabled={!canProceed() || loading.diagnosis}
+						disabled={!canProceed() || loading.plants}
 						className={`
-              px-6 py-2 rounded-md font-medium transition-colors duration-200
-              ${canProceed() && !loading.diagnosis
+              							px-6 py-2 rounded-md font-medium transition-colors duration-200
+              							${canProceed() && !loading.diagnosis
 								? 'bg-green-600 text-white hover:bg-green-700'
 								: 'bg-gray-300 text-gray-500 cursor-not-allowed'
-							}
-            `}
+							}`}
 					>
-						{loading.diagnosis ? 'Analyzing...' : 'Next'}
+						{loading.plants ? 'Analyzing...' : 'Next'}
 					</button>
 				)}
 			</div>

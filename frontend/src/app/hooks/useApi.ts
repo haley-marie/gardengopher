@@ -19,7 +19,13 @@ export const usePlants = () => {
 			setLoading(true);
 			setError(null);
 			const data = await api.plants.getAll();
-			setPlants(data);
+			const normalized = data.map((p: any) => ({
+				id: p.ID,
+				name: p.Name,
+				scientific_name: p.ScientificName,
+				created_at: p.CreatedAt,
+			}));
+			setPlants(normalized);
 		} catch (err) {
 			setError(handleApiError(err));
 		} finally {
@@ -50,7 +56,13 @@ export const useSymptoms = () => {
 			setLoading(true);
 			setError(null);
 			const data = await api.symptoms.getAll();
-			setSymptoms(data);
+			const normalized: Symptom[] = data.map((s: any) => ({
+				id: s.ID,
+				name: s.Name,
+				description: s.Description,
+				created_at: s.CreatedAt,
+			}));
+			setSymptoms(normalized);
 		} catch (err) {
 			setError(handleApiError(err));
 		} finally {

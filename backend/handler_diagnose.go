@@ -163,6 +163,10 @@ func (cfg *apiConfig) diagnoseByConfidence(ctx context.Context, symptomIDs []int
 		symptomIDs32[i] = int32(id)
 	}
 
+	if len(symptomIDs32) == 0 {
+		return []DiagnosticResult{}, nil
+	}
+
 	results, err := cfg.DBQueries.GetConfidenceBasedDiagnosis(ctx, symptomIDs32)
 	if err != nil {
 		return nil, err

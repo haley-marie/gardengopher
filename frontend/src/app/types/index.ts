@@ -17,7 +17,6 @@ export interface Symptom {
 	id: number;
 	name: string;
 	description: string;
-	category: string;
 	created_at?: string;
 	updated_at?: string;
 }
@@ -65,10 +64,12 @@ export interface DiagnosisRequest {
 }
 
 export interface DiagnosisResult {
-	deficiency: Deficiency;
-	confidence_score: number;
+	deficiency_id: number;
+	deficiency_name: string;
+	description: string;
+	treatment: string;
+	confidence: number;
 	matched_symptoms: string[];
-	rule_matched?: DiagnosticRule;
 }
 
 export interface DiagnosisResultProps {

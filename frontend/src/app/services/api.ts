@@ -6,7 +6,7 @@ import {
 	ApiResponse,
 } from '../types';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 const DEFAULT_TIMEOUT = 10000;
 
 class ApiError extends Error {
@@ -24,7 +24,7 @@ class ApiError extends Error {
 const fetchWithTimeout = async (
 	url: string,
 	options: RequestInit = {},
-	timeout: number = DEFAULT_TIMEOUT
+	timeout: number = DEFAULT_TIMEOUT,
 ): Promise<Response> => {
 	const controller = new AbortController();
 	const timeoutId = setTimeout(() => controller.abort(), timeout);
@@ -187,11 +187,7 @@ export const api = {
 					body: JSON.stringify(request),
 				});
 
-				if (response.success) {
-					return response;
-				} else {
-					throw new ApiError(response.message || 'Failed to diagnose plant', 400);
-				}
+				return response;
 			} catch (error) {
 				console.error('Error diagnosing plant:', error);
 				throw error;
