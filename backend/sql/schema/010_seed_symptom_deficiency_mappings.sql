@@ -26,7 +26,7 @@ FROM (VALUES
 	('blossom_drop', 'calcium_deficiency', 0.75)
 ) AS mappings(symptom_name, deficiency_name, confidence_score)
 JOIN symptoms s ON s.name = mappings.symptom_name
-JOIN deficiencies d on d.name = mappings.deficiency_name;
+JOIN nutrient_deficiencies d on d.name = mappings.deficiency_name;
 
 -- +goose Down
 DELETE FROM symptom_deficiencies;
