@@ -1,5 +1,5 @@
 -- +goose Up
-INSERT INTO deficiencies (name, description, causes, treatment) VALUES
+INSERT INTO nutrient_deficiencies (name, description, causes, treatment) VALUES
 ('nitrogen_deficiency',
  'Insufficient nitrogen for plant growth.',
  'Common causes: excessive watering or waterlogged soil, soil low in organic matter',

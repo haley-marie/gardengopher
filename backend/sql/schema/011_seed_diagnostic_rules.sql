@@ -32,7 +32,7 @@ FROM (VALUES
 	'calcium_deficiency')
 ) AS rules(plant_name, conditions_json, deficiency_name)
 LEFT JOIN plants p ON p.name = rules.plant_name
-JOIN deficiencies d ON d.code = rules.deficiency_name;
+JOIN nutrient_deficiencies d ON d.name = rules.deficiency_name;
 
 -- +goose Down
 DELETE FROM diagnostic_rules;
