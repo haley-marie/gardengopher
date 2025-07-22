@@ -6,6 +6,11 @@ import (
 	"net/http"
 )
 
+type ApiResponse struct {
+	Success bool `json:"success"`
+	Data    any  `json:"data"`
+}
+
 func respondWithError(w http.ResponseWriter, code int, msg string, err error) {
 	if err != nil {
 		log.Println(err)
@@ -21,9 +26,13 @@ func respondWithError(w http.ResponseWriter, code int, msg string, err error) {
 	})
 }
 
-func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
+func respondWithJSON(w http.ResponseWriter, code int, payload any) {
 	w.Header().Set("Content-Type", "application/json")
-	dat, err := json.Marshal(payload)
+	resp := ApiResponse{
+		Success: true,
+		Data:    payload,
+	}
+	dat, err := json.Marshal(resp)
 	if err != nil {
 		log.Printf("Error marshalling JSON: %s", err)
 		w.WriteHeader(500)
