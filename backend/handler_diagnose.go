@@ -200,14 +200,14 @@ func (cfg *apiConfig) diagnoseByConfidence(ctx context.Context, symptomIDs []int
 }
 
 func (cfg *apiConfig) evaluateDiagnosticRule(conditions DiagnosticConditions, symptoms map[string]bool) (float64, []string) {
-	var matchedSyymptoms []string
+	var matchedSymptoms []string
 	requiredMatches := 0
 	optionalMatches := 0
 
 	for _, required := range conditions.RequiredSymptoms {
 		if symptoms[required] {
 			requiredMatches++
-			matchedSyymptoms = append(matchedSyymptoms, required)
+			matchedSymptoms = append(matchedSymptoms, required)
 		}
 	}
 
@@ -218,7 +218,7 @@ func (cfg *apiConfig) evaluateDiagnosticRule(conditions DiagnosticConditions, sy
 	for _, optional := range conditions.OptionalSymptoms {
 		if symptoms[optional] {
 			optionalMatches++
-			matchedSyymptoms = append(matchedSyymptoms, optional)
+			matchedSymptoms = append(matchedSymptoms, optional)
 		}
 	}
 
@@ -237,7 +237,7 @@ func (cfg *apiConfig) evaluateDiagnosticRule(conditions DiagnosticConditions, sy
 		baseConfidence = 1.0
 	}
 
-	return baseConfidence, matchedSyymptoms
+	return baseConfidence, matchedSymptoms
 }
 
 func (cfg *apiConfig) getSymptomMap(ctx context.Context) (map[string]int, error) {
