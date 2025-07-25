@@ -9,7 +9,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
-	"github.com/jubilant-gremlin/gardengopher/backend/internal/database"
+	"github.com/jubilant-gremlin/gardengopher/internal/database"
 	_ "github.com/lib/pq"
 )
 
