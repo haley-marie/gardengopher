@@ -21,9 +21,9 @@ type apiConfig struct {
 
 func corsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		w.Header().Set("Access-Control-Allow-Origin", readEnv("ALLOWED_ORIGINS"))
+		w.Header().Set("Access-Control-Allow-Headers", readEnv("ALLOWED_HEADERS"))
+		w.Header().Set("Access-Control-Allow-Methods", readEnv("ALLOWED_METHODS"))
 
 		if r.Method == "OPTIONS" {
 			w.WriteHeader(http.StatusOK)
@@ -35,28 +35,26 @@ func corsMiddleware(next http.Handler) http.Handler {
 	})
 }
 
+func readEnv(key string) string {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatalf("Error loading .env file: %s\n", err)
+	}
+
+	value := os.Getenv(key)
+	if value == "" {
+		log.Fatalf("%s environment variable not set.\n", key)
+	}
+	return value
+}
+
 func main() {
-	godotenv.Load(".env")
-	filepathRoot := os.Getenv("FILEPATH_ROOT")
-	if filepathRoot == "" {
-		log.Fatalln("FILEPATH_ROOT environment variable not set.")
+	filepathRoot, err := os.Getwd()
+	if err != nil {
+		log.Fatalf("Error getting current directory: %s\n", err)
 	}
 
-	platform := os.Getenv("PLATFORM")
-	if platform == "" {
-		log.Fatalln("PLATFORM environment variable not set.")
-	}
-
-	port := os.Getenv("PORT")
-	if port == "" {
-		log.Fatalln("PORT environment variable not set.")
-	}
-
-	dbURL := os.Getenv("DB_URL")
-	if dbURL == "" {
-		log.Fatalln("DB_URL environment variable not set.")
-	}
-	db, err := sql.Open("postgres", dbURL)
+	db, err := sql.Open("postgres", readEnv("DB_URL"))
 	if err != nil {
 		log.Fatalf("Error opening connection to Garden Gopher database: %s\n", err)
 	}
@@ -64,13 +62,13 @@ func main() {
 
 	cfg := &apiConfig{
 		FilepathRoot: filepathRoot,
-		Port:         port,
+		Port:         readEnv("PORT"),
 		DBQueries:    dbQueries,
 	}
 
 	mux := mux.NewRouter()
 	srv := &http.Server{
-		Addr:    ":" + port,
+		Addr:    ":" + cfg.Port,
 		Handler: mux,
 	}
 
