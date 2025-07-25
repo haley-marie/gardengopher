@@ -36,11 +36,6 @@ func corsMiddleware(next http.Handler) http.Handler {
 }
 
 func readEnv(key string) string {
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatalf("Error loading .env file: %s\n", err)
-	}
-
 	value := os.Getenv(key)
 	if value == "" {
 		log.Fatalf("%s environment variable not set.\n", key)
@@ -49,6 +44,11 @@ func readEnv(key string) string {
 }
 
 func main() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatalf("Error loading .env file: %s\n", err)
+	}
+
 	filepathRoot, err := os.Getwd()
 	if err != nil {
 		log.Fatalf("Error getting current directory: %s\n", err)
