@@ -7,31 +7,43 @@
 *.out
 go.work
 go.work.sum
-.env
-node_modules/
-package-lock.json
-yarn.lock
-.vscode/
-*.code-workspace
-.idea/
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
 .DS_Store
-dist/
-*.tsbuildinfo
-logs/
-*.log
+*.pem
+
+# debug
 npm-debug.log*
-bower_components/
-*.swp
-*.swo
-*~
-*.tmp
-*.temp
-frontend/node_modules/
-frontend/build/
-frontend/.env.local
-frontend/.env.development.local
-frontend/.env.test.local
-frontend/.env.production.local
-frontend/npm-debug.log*
-frontend/yarn-debug.log*
-frontend/yarn-error.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
