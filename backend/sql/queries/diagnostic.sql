@@ -29,3 +29,6 @@ SELECT id, name, description, causes, treatment FROM nutrient_deficiencies ORDER
 
 -- name: GetSymptoms :many
 SELECT id, name, description FROM symptoms ORDER BY name;
+
+-- name: GetSymptomById :one
+SELECT id, name, description from symptoms WHERE id = $1;

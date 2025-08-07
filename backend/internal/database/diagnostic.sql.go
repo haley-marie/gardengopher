@@ -195,6 +195,23 @@ func (q *Queries) GetPlants(ctx context.Context) ([]GetPlantsRow, error) {
 	return items, nil
 }
 
+const getSymptomById = `-- name: GetSymptomById :one
+SELECT id, name, description from symptoms WHERE id = $1
+`
+
+type GetSymptomByIdRow struct {
+	ID          int32
+	Name        string
+	Description string
+}
+
+func (q *Queries) GetSymptomById(ctx context.Context, id int32) (GetSymptomByIdRow, error) {
+	row := q.db.QueryRowContext(ctx, getSymptomById, id)
+	var i GetSymptomByIdRow
+	err := row.Scan(&i.ID, &i.Name, &i.Description)
+	return i, err
+}
+
 const getSymptomMap = `-- name: GetSymptomMap :many
 SELECT id, name FROM symptoms ORDER BY name
 `
