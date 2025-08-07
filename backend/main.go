@@ -78,6 +78,7 @@ func main() {
 	mux.HandleFunc("/api/symptoms", cfg.handlerGetSymptoms).Methods("GET", "OPTIONS")
 	mux.HandleFunc("/api/diagnose", cfg.handlerDiagnose).Methods("POST", "OPTIONS")
 	mux.HandleFunc("/api/symptoms/{symptomId}", cfg.handlerGetSymptomById).Methods("GET", "OPTIONS")
+	mux.HandleFunc("/api/plants/{plantId}", cfg.handlerGetPlantById).Methods("GET", "OPTIONS")
 
 	fmt.Printf("Serving files from %s on port %s\n", cfg.FilepathRoot, cfg.Port)
 	err = srv.ListenAndServe()
