@@ -11,6 +11,7 @@ export interface PlantSelectorProps {
 	selectedPlant: Plant | null;
 	onPlantSelect: (plant: Plant) => void;
 	loading?: boolean;
+	error: string | null;
 }
 
 export interface Symptom {

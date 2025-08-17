@@ -1,5 +1,5 @@
-import { Plant, ApiResponse } from '../../types';
-import { ApiError, apiRequest } from './api';
+import { Plant, ApiResponse } from '@/types/types';
+import { ApiError, apiRequest } from '../api';
 
 export const getAllPlants = async (): Promise<Plant[]> => {
 	try {

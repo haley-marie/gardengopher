@@ -1,5 +1,5 @@
-import { Symptom, ApiResponse } from '../../types';
-import { ApiError, apiRequest } from './api';
+import { ApiResponse, Symptom } from '@/types/types';
+import { ApiError, apiRequest } from '../api';
 
 export const getAllSymptoms = async (): Promise<Symptom[]> => {
 	try {

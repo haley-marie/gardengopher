@@ -1,0 +1,20 @@
+import React from 'react';
+
+function App() {
+	return (
+		<div className='min-h-screen bg-gray-100'>
+			<header className='bg-white shadow-sm border-b'>
+				<div className='max-w-4xl mx-auto px-6 py-4'>
+					<h1 className='text-2xl font-bold text-gray-800'>
+						🌱 Garden Gopher
+					</h1>
+					<p className="text-gray-600 mt-1">
+						Identify plant nutrient deficiencies and diseases
+					</p>
+				</div>
+			</header>
+		</div>
+	);
+}
+
+export default App;

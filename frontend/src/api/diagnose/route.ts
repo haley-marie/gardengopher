@@ -1,5 +1,5 @@
-import { DiagnosisResponse, DiagnosisRequest } from "@/app/types";
-import { apiRequest } from "./api";
+import { DiagnosisResponse, DiagnosisRequest } from "@/types/types";;
+import { apiRequest } from "../api";
 
 export const diagnose = async (request: DiagnosisRequest): Promise<DiagnosisResponse> => {
 	try {

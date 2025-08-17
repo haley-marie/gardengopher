@@ -1,6 +1,4 @@
-import {
-	ApiResponse,
-} from '../../types'
+import { ApiResponse } from "../types/types";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 const DEFAULT_TIMEOUT = 10000;
@@ -8,9 +6,9 @@ const RETRY_DELAY = 1000;
 
 class ApiError extends Error {
 	status: number;
-	data?: any;
+	data?: Error;
 
-	constructor(message: string, status: number, data?: any) {
+	constructor(message: string, status: number, data?: Error) {
 		super(message);
 		this.name = 'ApiError';
 		this.status = status;
@@ -100,7 +98,7 @@ const apiRequest = async <T>(
 	}
 };
 
-export const handleApiError = (error: any): string => {
+export const handleApiError = (error: Error): string => {
 	if (error instanceof ApiError) {
 		return error.message;
 	}
@@ -112,11 +110,11 @@ export const handleApiError = (error: any): string => {
 	return 'An unexpected error occurred';
 };
 
-export const isNetworkError = (error: any): boolean => {
+export const isNetworkError = (error: Error): boolean => {
 	return error instanceof ApiError && error.status === 0;
 };
 
-export const isTimeoutError = (error: any): boolean => {
+export const isTimeoutError = (error: Error): boolean => {
 	return error instanceof ApiError && error.status === 408;
 };
 
@@ -125,7 +123,7 @@ export const retryRequest = async <T>(
 	maxRetries: number = 3,
 	delay: number = RETRY_DELAY
 ): Promise<T> => {
-	let lastError: any;
+	let lastError: Error;
 
 	for (let i = 0; i < maxRetries; i++) {
 		try {
