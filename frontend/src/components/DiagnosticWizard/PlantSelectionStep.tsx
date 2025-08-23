@@ -1,8 +1,8 @@
 'use client';
 
-import { useCallback, useState } from "react";
 import React from "react";
-import { Plant, PlantSelectorProps } from "@/types/types";
+import { PlantSelectorProps } from "@/types/types";
+import PlantSelectButton from "./PlantSelectButton";
 
 const PlantSelectionStep: React.FC<PlantSelectorProps> = ({
 	plants,
@@ -31,29 +31,10 @@ const PlantSelectionStep: React.FC<PlantSelectorProps> = ({
 			</div>
 
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-				{plants.map((plant) => (
-					<button
-						key={plant.id}
-						onClick={() => onPlantSelect(plant)}
-						className={`
-              p-4 border-2 rounded-lg text-left transition-all duration-200 hover:shadow-md
-              ${selectedPlant?.id === plant.id
-								? 'border-green-500 bg-green-50 shadow-md'
-								: 'border-gray-200 hover:border-gray-300'
-							}
-            `}
-					>
-						<div className="font-semibold text-gray-800 capitalize">
-							{plant?.name?.replace('_', ' ') ?? ''}
-						</div>
-						{plant.scientific_name && (
-							<div className="text-sm text-gray-500 italic mt-1">
-								{plant.scientific_name}
-							</div>
-						)}
-					</button>
-				))}
+				{plants.map((plant) => PlantSelectButton(plant, onPlantSelect, selectedPlant))};
 			</div>
 		</div>
 	);
 }
+
+export default PlantSelectionStep;
