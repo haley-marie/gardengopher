@@ -22,6 +22,6 @@ const PlantSelectButton = (plant: Plant, onPlantSelect: PlantSelectorProps["onPl
 			)}
 		</button>
 	);
-}
+};
 
 export default PlantSelectButton;
