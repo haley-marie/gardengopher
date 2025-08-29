@@ -1,4 +1,6 @@
 import React from 'react';
+import PlantSelectionStep from '@/components/DiagnosticWizard/PlantSelectionStep';
+import { usePlants } from '@/hooks/usePlants';
 
 function App() {
 	return (
@@ -13,6 +15,9 @@ function App() {
 					</p>
 				</div>
 			</header>
+
+			<main className='py-8'>
+			</main>
 		</div>
 	);
 }

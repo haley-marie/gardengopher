@@ -1,5 +1,3 @@
-import { ApiResponse } from "../types/types";
-
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 const DEFAULT_TIMEOUT = 10000;
 const RETRY_DELAY = 1000;
@@ -49,11 +47,11 @@ const createHeaders = (additionalHeaders: Record<string, string> = {}): Record<s
 const handleResponse = async<T>(response: Response): Promise<T> => {
 	if (!response.ok) {
 		let errorMessage = `HTTP error. Status: ${response.status}`;
-		let errorData;
+		let errorData: Error;
 
 		try {
 			errorData = await response.json();
-			errorMessage = errorData.message || errorData.error || errorMessage;
+			errorMessage = errorData.message || errorData.name || errorMessage;
 		} catch (parseError) {
 			errorMessage = response.statusText || errorMessage;
 		}

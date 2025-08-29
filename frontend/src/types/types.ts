@@ -28,6 +28,7 @@ export interface SymptomSelectorProps {
 	onSymptomToggle: (symptomId: string) => void;
 	selectedPlant?: Plant | null;
 	loading?: boolean;
+	error: string | null;
 }
 
 export interface Deficiency {
@@ -155,3 +156,8 @@ export type PlantName =
 	| 'serrano_peppers'
 	| 'okra';
 
+export enum WizardStep {
+	PLANT_SELECTION,
+	SYMPTOM_SELECTION,
+	DIAGNOSIS_RESULTS,
+}

@@ -1,7 +1,7 @@
 import { DiagnosisResponse, DiagnosisRequest } from "@/types/types";;
 import { apiRequest } from "../api";
 
-export const diagnose = async (request: DiagnosisRequest): Promise<DiagnosisResponse> => {
+export const diagnosis = async (request: DiagnosisRequest): Promise<DiagnosisResponse> => {
 	try {
 		const response = await apiRequest<DiagnosisResponse>('api/diagnose', {
 			method: 'POST',
@@ -14,3 +14,5 @@ export const diagnose = async (request: DiagnosisRequest): Promise<DiagnosisResp
 		throw error;
 	}
 };
+
+
