@@ -17,7 +17,6 @@ export const useDiagnosis = () => {
 			setResults(response);
 		} catch (err) {
 			setError(handleApiError(err));
-			throw err;
 		} finally {
 			setLoading(false);
 		}
