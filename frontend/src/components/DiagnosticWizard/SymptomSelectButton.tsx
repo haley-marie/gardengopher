@@ -1,3 +1,5 @@
+'use client'
+
 import { Symptom, SymptomSelectorProps } from "@/types/types";
 
 const SymptomSelectButton = (symptom: Symptom, selectedSymptoms: SymptomSelectorProps["selectedSymptoms"], onSymptomToggle: SymptomSelectorProps["onSymptomToggle"]) => {
@@ -5,12 +7,12 @@ const SymptomSelectButton = (symptom: Symptom, selectedSymptoms: SymptomSelector
 		<label
 			key={symptom.id}
 			className={`
-              flex items-start p-4 border-2 rounded-lg cursor-pointer transition-all duration-200
-              ${selectedSymptoms.has(symptom.name)
+	        		      flex items-start p-4 border-2 rounded-lg cursor-pointer transition-all duration-200
+        			      ${selectedSymptoms.has(symptom.name)
 					? 'border-green-500 bg-green-50'
 					: 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
 				}
-            `}
+            		`}
 		>
 			<input
 				type="checkbox"

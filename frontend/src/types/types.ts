@@ -75,18 +75,12 @@ export interface DiagnosisResult {
 }
 
 export interface DiagnosisResultProps {
-	diagnosis: DiagnosisData;
+	results: DiagnosisResult[];
 	loading?: boolean;
 	error?: string | null;
-}
+	selectedPlant: Plant | null;
+	selectedSymptoms: string[];
 
-export interface DiagnosisData {
-	deficiency: string;
-	name: string;
-	description: string;
-	treatment: string;
-	confidence: number;
-	matchedSymptoms?: string[];
 }
 
 export interface DiagnosisResponse {
@@ -96,7 +90,7 @@ export interface DiagnosisResponse {
 }
 
 export interface TreatmentRecommendationProps {
-	diagnosis: DiagnosisData
+	diagnosis: DiagnosisResult
 }
 
 export interface ApiResponse<T> {

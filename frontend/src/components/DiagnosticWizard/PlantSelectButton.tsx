@@ -1,3 +1,5 @@
+'use client'
+
 import { Plant, PlantSelectorProps } from "@/types/types"
 const PlantSelectButton = (plant: Plant, onPlantSelect: PlantSelectorProps["onPlantSelect"], selectedPlant: PlantSelectorProps["selectedPlant"]) => {
 	return (

@@ -1,3 +1,5 @@
+'use client'
+
 import { SymptomSelectorProps } from "@/types/types";
 import SymptomSelectButton from "./SymptomSelectButton";
 
