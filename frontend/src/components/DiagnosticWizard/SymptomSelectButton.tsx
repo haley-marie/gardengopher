@@ -8,7 +8,7 @@ const SymptomSelectButton = (symptom: Symptom, selectedSymptoms: SymptomSelector
 			key={symptom.id}
 			className={`
 	        		      flex items-start p-4 border-2 rounded-lg cursor-pointer transition-all duration-200
-        			      ${selectedSymptoms.has(symptom.name)
+        			      ${selectedSymptoms.includes(symptom.name)
 					? 'border-green-500 bg-green-50'
 					: 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
 				}
@@ -16,7 +16,7 @@ const SymptomSelectButton = (symptom: Symptom, selectedSymptoms: SymptomSelector
 		>
 			<input
 				type="checkbox"
-				checked={selectedSymptoms.has(symptom.name)}
+				checked={selectedSymptoms.includes(symptom.name)}
 				onChange={() => onSymptomToggle(symptom.name)}
 				className="mt-1 h-4 w-4 text-green-600 rounded border-gray-300 focus:ring-green-500"
 			/>

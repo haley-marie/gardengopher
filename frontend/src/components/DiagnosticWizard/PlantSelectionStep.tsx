@@ -3,6 +3,8 @@
 import React from "react";
 import { PlantSelectorProps } from "@/types/types";
 import PlantSelectButton from "./PlantSelectButton";
+import LoadingUI from "../loading";
+import ErrorUI from "../error";
 
 const PlantSelectionStep: React.FC<PlantSelectorProps> = ({
 	plants,
@@ -26,12 +28,12 @@ const PlantSelectionStep: React.FC<PlantSelectorProps> = ({
 					Select Your Plant
 				</h2>
 				<p className="text-gray-600">
-					Choose the plant you'd like to diagnose from the list below.
+					Choose the plant you&apos;d like to diagnose from the list below.
 				</p>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-				{plants.map((plant) => PlantSelectButton(plant, onPlantSelect, selectedPlant))};
+			<div>
+				{PlantSelectButton(plants, onPlantSelect, selectedPlant)}
 			</div>
 		</div>
 	);

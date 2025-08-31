@@ -14,11 +14,11 @@ export const useSymptoms = () => {
 			setError(null);
 
 			const data = await getAllSymptoms();
-			const normalized: Symptom[] = data.map((s: any) => ({
-				id: s.ID,
-				name: s.Name,
-				description: s.Description,
-				created_at: s.CreatedAt,
+			const normalized: Symptom[] = data.map((s: Symptom) => ({
+				id: s.id,
+				name: s.name,
+				description: s.description,
+				created_at: s.created_at,
 			}));
 			setSymptoms(normalized);
 		} catch (err) {

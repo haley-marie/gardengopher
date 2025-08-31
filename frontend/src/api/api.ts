@@ -53,7 +53,7 @@ const handleResponse = async<T>(response: Response): Promise<T> => {
 			errorData = await response.json();
 			errorMessage = errorData.message || errorData.name || errorMessage;
 		} catch (parseError) {
-			errorMessage = response.statusText || errorMessage;
+			errorMessage = parseError || response.statusText || errorMessage;
 		}
 
 		throw new ApiError(errorMessage, response.status, errorData);
@@ -62,7 +62,7 @@ const handleResponse = async<T>(response: Response): Promise<T> => {
 	try {
 		return await response.json();
 	} catch (error) {
-		throw new ApiError('Invalid JSON response', response.status);
+		throw new ApiError('Invalid JSON response', error);
 	}
 };
 

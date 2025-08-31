@@ -14,14 +14,8 @@ export const usePlants = () => {
 			setError(null);
 
 			const data = await getAllPlants();
-			const normalized = data.map((p: Plant) => ({
-				id: p.id,
-				name: p.name,
-				scientific_name: p.scientific_name,
-				created_at: p.created_at,
-			}));
 
-			setPlants(normalized);
+			setPlants(data);
 		} catch (error) {
 			setError(handleApiError(error));
 		} finally {

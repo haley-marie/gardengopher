@@ -1,13 +1,12 @@
 import React from 'react';
-import PlantSelectionStep from '@/components/DiagnosticWizard/PlantSelectionStep';
-import { usePlants } from '@/hooks/usePlants';
+import DiagnosticWizard from '@/components/DiagnosticWizard/DiagnosticWizard';
 
 function App() {
 	return (
-		<div className='min-h-screen bg-gray-100'>
-			<header className='bg-white shadow-sm border-b'>
-				<div className='max-w-4xl mx-auto px-6 py-4'>
-					<h1 className='text-2xl font-bold text-gray-800'>
+		<div className="min-h-screen bg-gray-100">
+			<header className="bg-white shadow-sm border-b">
+				<div className="max-w-4xl mx-auto px-6 py-4">
+					<h1 className="text-2xl font-bold text-gray-800">
 						🌱 Garden Gopher
 					</h1>
 					<p className="text-gray-600 mt-1">
@@ -16,10 +15,11 @@ function App() {
 				</div>
 			</header>
 
-			<main className='py-8'>
+			<main className="py-8">
+				<DiagnosticWizard />
 			</main>
 		</div>
 	);
-}
+};
 
 export default App;

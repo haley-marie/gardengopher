@@ -6,3 +6,5 @@ const LoadingUI = (loadingMsg: string) => {
 		</div>
 	);
 }
+
+export default LoadingUI;

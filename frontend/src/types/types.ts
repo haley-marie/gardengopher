@@ -1,9 +1,9 @@
 export interface Plant {
-	id: number;
-	name: string;
-	scientific_name?: string;
-	created_at?: string;
-	updated_at?: string;
+	ID: number;
+	Name: string;
+	ScientificName?: string;
+	CreatedAt?: string;
+	UpdatedAt?: string;
 }
 
 export interface PlantSelectorProps {
@@ -24,7 +24,7 @@ export interface Symptom {
 
 export interface SymptomSelectorProps {
 	symptoms: Symptom[];
-	selectedSymptoms: Set<string>;
+	selectedSymptoms: string[];
 	onSymptomToggle: (symptomId: string) => void;
 	selectedPlant?: Plant | null;
 	loading?: boolean;
@@ -80,7 +80,6 @@ export interface DiagnosisResultProps {
 	error?: string | null;
 	selectedPlant: Plant | null;
 	selectedSymptoms: string[];
-
 }
 
 export interface DiagnosisResponse {
@@ -155,3 +154,4 @@ export enum WizardStep {
 	SYMPTOM_SELECTION,
 	DIAGNOSIS_RESULTS,
 }
+

@@ -1,6 +1,8 @@
 'use client'
 import { DiagnosisResultProps } from "@/types/types"
 import ResultTreatmentUI from "./ResultTreatmentUI";
+import LoadingUI from "../loading";
+import ErrorUI from "../error";
 
 const DiagnosisResultStep: React.FC<DiagnosisResultProps> = ({
 	results,
@@ -22,7 +24,7 @@ const DiagnosisResultStep: React.FC<DiagnosisResultProps> = ({
 			<div className="text-center py-8">
 				<div className="text-gray-500">
 					<h3 className="text-lg font-medium mb-2">No diagnosis found</h3>
-					<p>We couldn't identify a specific deficiency based on the selected symptoms.</p>
+					<p>We couldn&pos;t identify a specific deficiency based on the selected symptoms.</p>
 					<p className="mt-2">Try selecting different symptoms or consult a gardening expert.</p>
 				</div>
 			</div>

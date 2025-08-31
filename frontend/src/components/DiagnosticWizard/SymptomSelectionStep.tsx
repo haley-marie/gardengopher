@@ -2,6 +2,8 @@
 
 import { SymptomSelectorProps } from "@/types/types";
 import SymptomSelectButton from "./SymptomSelectButton";
+import LoadingUI from "../loading";
+import ErrorUI from "../error";
 
 const SymptomSelectionStep: React.FC<SymptomSelectorProps> = ({
 	symptoms,
@@ -32,7 +34,7 @@ const SymptomSelectionStep: React.FC<SymptomSelectorProps> = ({
 					</span>?
 				</p>
 				<div className="mt-2 text-sm text-green-600">
-					Selected: {selectedSymptoms.size} symptom{selectedSymptoms.size !== 1 ? 's' : ''}
+					Selected: {selectedSymptoms.length} symptom{selectedSymptoms.length !== 1 ? 's' : ''}
 				</div>
 			</div>
 

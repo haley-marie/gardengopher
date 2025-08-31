@@ -7,3 +7,5 @@ const ErrorUI = (errorMsg: string) => {
 		</div>
 	);
 }
+
+export default ErrorUI;

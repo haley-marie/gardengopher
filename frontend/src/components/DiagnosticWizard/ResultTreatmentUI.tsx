@@ -1,3 +1,5 @@
+'use client'
+
 import { DiagnosisResult, Plant } from "@/types/types";
 
 const ResultTreatmentUI = (selectedPlant: Plant, selectedSymptoms: string[], results: DiagnosisResult[]) => {
