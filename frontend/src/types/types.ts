@@ -1,9 +1,9 @@
 export interface Plant {
-	id: number;
-	name: string;
-	scientific_name?: string;
-	created_at?: string;
-	updated_at?: string;
+	ID: number;
+	Name: string;
+	ScientificName?: string;
+	CreatedAt?: string;
+	UpdatedAt?: string;
 }
 
 export interface PlantSelectorProps {
@@ -11,6 +11,7 @@ export interface PlantSelectorProps {
 	selectedPlant: Plant | null;
 	onPlantSelect: (plant: Plant) => void;
 	loading?: boolean;
+	error: string | null;
 }
 
 export interface Symptom {
@@ -23,10 +24,11 @@ export interface Symptom {
 
 export interface SymptomSelectorProps {
 	symptoms: Symptom[];
-	selectedSymptoms: Set<string>;
+	selectedSymptoms: string[];
 	onSymptomToggle: (symptomId: string) => void;
 	selectedPlant?: Plant | null;
 	loading?: boolean;
+	error: string | null;
 }
 
 export interface Deficiency {
@@ -73,18 +75,11 @@ export interface DiagnosisResult {
 }
 
 export interface DiagnosisResultProps {
-	diagnosis: DiagnosisData;
+	results: DiagnosisResult[];
 	loading?: boolean;
 	error?: string | null;
-}
-
-export interface DiagnosisData {
-	deficiency: string;
-	name: string;
-	description: string;
-	treatment: string;
-	confidence: number;
-	matchedSymptoms?: string[];
+	selectedPlant: Plant | null;
+	selectedSymptoms: string[];
 }
 
 export interface DiagnosisResponse {
@@ -94,7 +89,7 @@ export interface DiagnosisResponse {
 }
 
 export interface TreatmentRecommendationProps {
-	diagnosis: DiagnosisData
+	diagnosis: DiagnosisResult
 }
 
 export interface ApiResponse<T> {
@@ -153,4 +148,10 @@ export type PlantName =
 	| 'cucumber'
 	| 'serrano_peppers'
 	| 'okra';
+
+export enum WizardStep {
+	PLANT_SELECTION,
+	SYMPTOM_SELECTION,
+	DIAGNOSIS_RESULTS,
+}
 
