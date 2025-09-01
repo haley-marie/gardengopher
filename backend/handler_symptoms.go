@@ -28,12 +28,13 @@ func (cfg *apiConfig) handlerGetSymptoms(w http.ResponseWriter, r *http.Request)
 func (cfg *apiConfig) handlerGetSymptomById(w http.ResponseWriter, r *http.Request) {
 	symptomId := r.PathValue("symptomId")
 
-	symptomIdInt, err := strconv.Atoi(symptomId)
+	symptomIdParsed, err := strconv.ParseInt(symptomId, 10, 32)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "Could not convert symptom id to integer", err)
+		return
 	}
 
-	symptom, err := cfg.DBQueries.GetSymptomById(r.Context(), int32(symptomIdInt))
+	symptom, err := cfg.DBQueries.GetSymptomById(r.Context(), int32(symptomIdParsed))
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "Could not get symptom from database", err)
 	}
