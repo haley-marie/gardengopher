@@ -19,14 +19,16 @@ func (cfg *apiConfig) handlerGetPlants(w http.ResponseWriter, r *http.Request) {
 func (cfg *apiConfig) handlerGetPlantById(w http.ResponseWriter, r *http.Request) {
 	plantId := r.PathValue("plantId")
 
-	plantIdInt, err := strconv.Atoi(plantId)
+	plantIdInt64, err := strconv.ParseInt(plantId, 10, 32)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "Could not convert plant id to integer", err)
+		return
 	}
 
-	plant, err := cfg.DBQueries.GetSymptomById(r.Context(), int32(plantIdInt))
+	plant, err := cfg.DBQueries.GetSymptomById(r.Context(), int32(plantIdInt64))
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "Could not get plant from database", err)
+		return
 	}
 
 	respondWithJSON(w, 200, plant)
